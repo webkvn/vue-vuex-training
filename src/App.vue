@@ -1,13 +1,15 @@
 <template>
  <div id="app">
-    <div class="container">
-      <div class="header clearfix">
-      <todo-input></todo-input>
-      </div>
-      <div class="container theme-showcase">
-      <todo-list></todo-list>
-      </div>
-    </div>
+    <el-row>
+      <el-col :span="12" :offset="6">
+        <todo-input></todo-input>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="12" :offset="6">
+        <todo-list></todo-list>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -15,7 +17,7 @@
 import todoList from  './components/todoList'
 import todoInput from './components/todoInput'
 export default {
-  components : { todoList,todoInput },// 注册组件
+  components : { todoList,todoInput },
   name: 'app',
   data () {
       return {

@@ -1,18 +1,38 @@
 <template>
     <div id="todo-list">
         <div>
-            <div class="container">
-                <div class="row">
-                    <ul class="list-group">
-                        <li class="list-group-item" v-for="(todo, index) in todoList" :key="todo.id">
-                            {{ todo.todo}}
-                            <span class="badge" v-if="todo.done == false">未完成</span>
-                            <span class="badge" v-else>已完成</span>
-                            <button class="btn tbn-success btn-xs" @click="deleteTodo(index)">X</button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                <el-table
+                :data="todoList"
+                style="width: 100%">
+                <el-table-column
+                    prop="id"
+                    label="序号"
+                    width="180">
+                </el-table-column>
+                <el-table-column
+                    prop="todo"
+                    label="明细"
+                    width="180">
+                </el-table-column>
+                 <el-table-column
+                    prop="done"
+                    label="状态"
+                    width="180">
+                    <template slot-scope="scope">
+                        <span class="badge" v-if="scope.row.done == false">未完成</span>
+                        <span class="badge" v-else>已完成</span>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                    label="操作">
+                    <template slot-scope="scope">
+                        <el-button
+                        size="mini"
+                        type="danger"
+                        @click="deleteTodo(scope.$index, scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+                </el-table>
         </div>
     </div>
 </template>
@@ -26,16 +46,14 @@
             }
         },
         props: ['msMsg'],
-        methods : {
-            // 这里我们使用commit 提交删除操作
+        methods : {   
             deleteTodo (index){
                 console.log(index)
                 this.$store.commit('deleteTodo',index)
             }
         },
         computed : {
-            todoList(){
-                // 这里我们获取state的数据进行渲染
+            todoList(){    
                 return this.$store.state.todoList
             }
         }
