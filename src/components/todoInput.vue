@@ -27,7 +27,7 @@
                 if(this.newTodo == ''){
                     //alert('事项不能为空!');
                     this.$message({
-                        message: '警告哦，这是一条警告消息',
+                        message: '事项不能为空!',
                         type: 'warning'
                     });
                     return false;
